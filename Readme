@@ -1,0 +1,163 @@
+Name: Jackson Hoenig
+Class: CMP-SCI 4760-001
+Project 5
+
+Description: 
+-------------------------------------------------------------------------
+OSS:
+	In this program, the Operating system simulator starts by allocating shared memory
+for the Resource Descriptor array of 20. about 20% of those are then declared sharable and
+each class gets a total number of 1-10 that can be used. then at random time intervals
+child processes are forked off. then the OSS checks to see if any messages are waiting from the
+children. if not it checks to see if there are any pending requests. if there are, the 
+request is evaluated to be safe or not.(see Banker Algorithm below) if it is safe it is
+the process is told by changing the shared memory to its child pid. finally the OSS
+increments the clock and loops back.
+
+USER:
+	When the user is forked off, it first calculates a time that it will run
+an event based on the shared memory clock and the bound given in the options of OSS.
+when that event time passes a number from 0-2 is generated(0 only possible after 1 second)
+0 means terminate and a message is sent to OSS to let it know.
+1 means request and it awaits its request granted by waiting on shared memory.
+2 means release and it waits on the shared memory for the OSS to tell it
+that is is done releasing memory. then the process loops until a 0 is rolled or
+the OSS kills it.
+
+NOTE: to make the project look more life like the 0 is forced if the process
+has received all of its max claims of resources.
+
+Banker Algorithm:
+	The banker algorithm is run with a request and the shared memory.
+the request is simulated on copies of the current Resource Tables and
+the algorithm tries to find a safe sequence of processes. if it cannot find
+one then the request is deemed unsafe and is put to sleep until something 
+changes.
+--------------------------------------------------------------------------
+
+Ending situations:
+---------------------------------------------------------------------------
+1. The program runs for the specified timeout time, terminates all out-
+    standing children, closes and deletes IPC data, then exits.
+2. The program spawns 100 processes, waits for the timer to run out.
+----------------------------------------------------------------------------- 
+
+Assumptions:
+-----------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------
+How to run:
+
+-----------------------------------------------------------------------------
+$ make clean
+$ make
+$ ./oss [-t Time in Seconds before timeout] [-v for verbose] [-b [Bound]]
+-----------------------------------------------------------------------------
+
+GitLog:
+commit 015e30fc011a1ca47dfcb7d05bad41200c67be22
+Author: Jackson Hoenig <Jthkn9@Mail.Umsl.edu>
+Date:   Sun Nov 10 02:12:04 2019 -0600
+
+    Final commit 11/10/2019 2:00am turning in now on due date.
+
+commit 9a2589beeb122b3d353615369684aca4035d58a6
+Author: Jackson Hoenig <Jthkn9@Mail.Umsl.edu>
+Date:   Sun Nov 10 01:03:32 2019 -0600
+
+    last changes coming up soon.
+
+commit 3327bbeaa8f3935b15585906f717e0fcc66a67aa
+Author: Jackson Hoenig <Jthkn9@Mail.Umsl.edu>
+Date:   Sat Nov 9 22:50:15 2019 -0600
+
+    Please be the last commit besides readme.
+
+commit b70821eeb330d35b6ef0825bfce0a85877627e9f
+Author: Jackson Hoenig <Jthkn9@Mail.Umsl.edu>
+Date:   Sat Nov 9 08:35:06 2019 -0600
+
+    sharable was done wrong to make things bad. now i am adding it to PCB but not subtracting it from RD.
+    appears to be working again with changes.
+
+commit b103a7e7833f7d1cd944fb408555da2760bd6459
+Author: Jackson Hoenig <Jthkn9@Mail.Umsl.edu>
+Date:   Fri Nov 8 14:45:16 2019 -0600
+
+    About to change the release to release multiple. save state commit
+
+commit c26a7cd4fa6cfa19a55ee031c9a755a1c3b99fdb
+Author: Jackson Hoenig <Jthkn9@Mail.Umsl.edu>
+Date:   Tue Nov 5 08:18:49 2019 -0600
+
+    Added full table print every 20 requests.
+    bound B needed
+    verbose needed
+    100,000 line limit needed
+
+commit aca8c3c4e757d266f18ab8bd8d81daad5a25ba1e
+Author: Jackson Hoenig <Jthkn9@Mail.Umsl.edu>
+Date:   Tue Nov 5 07:26:15 2019 -0600
+
+    Took out the warnings. still need 5 things in note:
+    output how many granted
+    parameter for 0-B bound in user
+    verbose setting being used
+    lines counted and limited to 100,000
+    log unsafe requests, every 20 requests output FULL table
+
+commit d73af9e2c91c8d313abad3a2f00344797aeef7ee
+Author: Jackson Hoenig <Jthkn9@Mail.Umsl.edu>
+Date:   Mon Nov 4 17:04:34 2019 -0600
+
+    Changed the oss to not worry about sharables. this would result in negative numbers on that resource??? change that in oss to reflect.
+    
+    also changed note and some readme
+
+commit 884b0d19fecf5173127537a3b83b3747da7845a6
+Author: Jackson Hoenig <Jthkn9@Mail.Umsl.edu>
+Date:   Mon Nov 4 16:11:48 2019 -0600
+
+    It is done. still need to add releases, readme, comments, re-read stuff.
+    gonna eat and pray. :)
+
+commit 25a1ebbb62de6e6a62739d8ce246aaf3c3acb0d7
+Author: Jackson Hoenig <Jthkn9@Mail.Umsl.edu>
+Date:   Sun Nov 3 20:37:45 2019 -0600
+
+    Is it done? it seems to be working. maybe add comments and re-read description?
+    Praise God it seems to be working.
+
+commit 921d54675a7620f673480588e63e0d7aa64810b7
+Author: Jackson Hoenig <Jthkn9@Mail.Umsl.edu>
+Date:   Sun Nov 3 16:35:03 2019 -0600
+
+     I think we have liftoff folks. Praise God he has changed my crappy code into something that works!
+    Still need bankers algorithm which may be biggest part.
+
+commit ad88422437057de17bcdb1531ca9c789029b0106
+Author: Jackson Hoenig <Jthkn9@Mail.Umsl.edu>
+Date:   Sat Nov 2 19:00:42 2019 -0500
+
+    Added a needs matrix to the pcb.
+
+commit fda69e43941cb905da246eec4e4e945fbb35738e
+Author: Jackson Hoenig <Jthkn9@Mail.Umsl.edu>
+Date:   Sat Nov 2 17:49:27 2019 -0500
+
+    We now have everything working for requests/releases of 1 class still need to do algorithmn
+
+commit 2ff56310d23c8f8ad931880a26ca8423dc5dce10
+Author: Jackson Hoenig <Jthkn9@Mail.Umsl.edu>
+Date:   Sat Nov 2 16:13:25 2019 -0500
+
+    It seems to be working currently for requests and terminations.
+    Still need to work in releases, and the algorithm
+    Maybe other things i forgot?
+
+commit 2cae22e6fd918c97e95cfae15c970828eb9456e3
+Author: Jackson Hoenig <Jthkn9@Mail.Umsl.edu>
+Date:   Tue Oct 29 15:41:54 2019 -0500
+
+    Changed oss.c to get rid of the multilevel queue. still need testing.
+    Next change should be on the user.c

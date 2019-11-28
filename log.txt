@@ -1,0 +1,907 @@
+OSS: Generating process 0 with pid 12786 at time 0:0
+OSS: Generating process 1 with pid 12787 at time 0:100
+OSS: Generating process 2 with pid 12788 at time 0:200
+OSS: Generating process 3 with pid 12789 at time 0:300
+OSS: Generating process 4 with pid 12790 at time 0:400
+OSS: Generating process 5 with pid 12791 at time 0:500
+OSS: process 12786 has requesting page 9
+size of frameTable: 0
+OSS: Generating process 6 with pid 12792 at time 0:600
+OSS: process 12787 has requesting page 26
+size of frameTable: 1
+OSS: Generating process 7 with pid 12793 at time 0:700
+OSS: process 12789 has requesting page 26
+size of frameTable: 2
+OSS: page found in frame 1OSS: Generating process 8 with pid 12794 at time 0:800
+OSS: process 12788 has requesting page 25
+size of frameTable: 2
+OSS: Generating process 9 with pid 12795 at time 0:900
+OSS: process 12786 has requesting page 6
+size of frameTable: 3
+OSS: Generating process 10 with pid 12796 at time 0:1000
+OSS: process 12792 has requesting page 23
+size of frameTable: 4
+OSS: Generating process 11 with pid 12797 at time 0:1100
+OSS: process 12787 has requesting page 10
+size of frameTable: 5
+OSS: Generating process 12 with pid 12798 at time 0:1200
+OSS: process 12790 has requesting page 2
+size of frameTable: 6
+OSS: Generating process 13 with pid 12799 at time 0:1300
+OSS: process 12789 has requesting page 27
+size of frameTable: 7
+OSS: Generating process 14 with pid 12800 at time 0:1400
+OSS: process 12791 has requesting page 6
+size of frameTable: 8
+OSS: page found in frame 3OSS: Generating process 15 with pid 12801 at time 0:1500
+OSS: process 12788 has requesting page 5
+size of frameTable: 8
+OSS: Generating process 16 with pid 12802 at time 0:1600
+OSS: process 12795 has requesting page 3
+size of frameTable: 9
+OSS: Generating process 17 with pid 12803 at time 0:1700
+OSS: process 12792 has requesting page 28
+size of frameTable: 10
+OSS: process 12787 has requesting page 1
+size of frameTable: 11
+OSS: process 12786 has requesting page 17
+size of frameTable: 12
+OSS: process 12793 has requesting page 5
+size of frameTable: 13
+OSS: process 12794 has requesting page 4
+size of frameTable: 14
+OSS: process 12789 has requesting page 6
+size of frameTable: 15
+OSS: page found in frame 3OSS: process 12799 has requesting page 17
+size of frameTable: 15
+OSS: process 12796 has requesting page 23
+size of frameTable: 16
+OSS: process 12791 has requesting page 5
+size of frameTable: 17
+OSS: page found in frame 13OSS: process 12788 has requesting page 17
+size of frameTable: 17
+OSS: process 12800 has requesting page 30
+size of frameTable: 18
+OSS: process 12793 has requesting page 1
+size of frameTable: 19
+OSS: page found in frame 11OSS: process 12789 has requesting page 12
+size of frameTable: 19
+OSS: process 12797 has requesting page 7
+size of frameTable: 20
+OSS: process 12795 has requesting page 20
+size of frameTable: 21
+OSS: process 12792 has requesting page 17
+size of frameTable: 22
+OSS: process 12786 has requesting page 29
+size of frameTable: 23
+OSS: process 12799 has requesting page 0
+size of frameTable: 24
+OSS: process 12798 has requesting page 28
+size of frameTable: 25
+OSS: process 12794 has requesting page 11
+size of frameTable: 26
+OSS: process 12791 has requesting page 4
+size of frameTable: 27
+OSS: process 12802 has requesting page 22
+size of frameTable: 28
+OSS: process 12800 has requesting page 11
+size of frameTable: 29
+OSS: process 12793 has requesting page 11
+size of frameTable: 30
+OSS: process 12789 has requesting page 7
+size of frameTable: 31
+OSS: process 12802 has requesting page 6
+size of frameTable: 32
+OSS: page found in frame 3OSS: process 12800 has requesting page 3
+size of frameTable: 32
+OSS: process 12793 has requesting page 10
+size of frameTable: 33
+OSS: process 12803 has requesting page 9
+size of frameTable: 34
+OSS: process 12797 has requesting page 7
+size of frameTable: 35
+OSS: process 12789 has requesting page 6
+size of frameTable: 36
+OSS: process 12795 has requesting page 27
+size of frameTable: 37
+OSS: process 12792 has requesting page 24
+size of frameTable: 38
+OSS: process 12786 has requesting page 17
+size of frameTable: 39
+OSS: page found in frame 12OSS: process 12801 has requesting page 14
+size of frameTable: 39
+OSS: process 12799 has requesting page 6
+size of frameTable: 40
+OSS: process 12794 has requesting page 10
+size of frameTable: 41
+OSS: process 12791 has requesting page 14
+size of frameTable: 42
+OSS: page found in frame 39OSS: process 12787 has requesting page 19
+size of frameTable: 42
+OSS: process 12802 has requesting page 31
+size of frameTable: 43
+OSS: process 12796 has requesting page 30
+size of frameTable: 44
+OSS: process 12790 has requesting page 27
+size of frameTable: 45
+OSS: process 12788 has requesting page 1
+size of frameTable: 46
+OSS: process 12798 has requesting page 12
+size of frameTable: 47
+OSS: process 12800 has requesting page 25
+size of frameTable: 48
+OSS: process 12793 has requesting page 29
+size of frameTable: 49
+OSS: process 12803 has requesting page 29
+size of frameTable: 50
+OSS: process 12797 has requesting page 8
+size of frameTable: 51
+OSS: process 12789 has requesting page 12
+size of frameTable: 52
+OSS: page found in frame 19OSS: process 12795 has requesting page 20
+size of frameTable: 52
+OSS: process 12792 has requesting page 9
+size of frameTable: 53
+OSS: process 12786 has requesting page 6
+size of frameTable: 54
+OSS: page found in frame 3OSS: process 12801 has requesting page 9
+size of frameTable: 54
+OSS: page found in frame 0OSS: process 12799 has requesting page 3
+size of frameTable: 54
+OSS: process 12794 has requesting page 30
+size of frameTable: 55
+OSS: process 12791 has requesting page 17
+size of frameTable: 56
+OSS: process 12787 has requesting page 11
+size of frameTable: 57
+OSS: process 12802 has requesting page 23
+size of frameTable: 58
+OSS: process 12796 has requesting page 9
+size of frameTable: 59
+OSS: process 12790 has requesting page 8
+size of frameTable: 60
+OSS: process 12788 has requesting page 24
+size of frameTable: 61
+OSS: process 12798 has requesting page 1
+size of frameTable: 62
+OSS: process 12800 has requesting page 4
+size of frameTable: 63
+OSS: process 12793 has requesting page 2
+size of frameTable: 64
+OSS: process 12803 has requesting page 24
+size of frameTable: 65
+OSS: process 12797 has requesting page 28
+size of frameTable: 66
+OSS: process 12789 has requesting page 24
+size of frameTable: 67
+OSS: process 12795 has requesting page 25
+size of frameTable: 68
+OSS: process 12792 has requesting page 29
+size of frameTable: 69
+OSS: process 12786 has requesting page 6
+size of frameTable: 70
+OSS: page found in frame 3OSS: process 12801 has requesting page 29
+size of frameTable: 70
+OSS: page found in frame 23OSS: process 12799 has requesting page 25
+size of frameTable: 70
+OSS: process 12794 has requesting page 7
+size of frameTable: 71
+OSS: process 12791 has requesting page 4
+size of frameTable: 72
+OSS: process 12787 has requesting page 11
+size of frameTable: 73
+OSS: process 12802 has requesting page 16
+size of frameTable: 74
+OSS: process 12796 has requesting page 10
+size of frameTable: 75
+OSS: process 12790 has requesting page 12
+size of frameTable: 76
+OSS: process 12788 has requesting page 13
+size of frameTable: 77
+OSS: process 12798 has requesting page 28
+size of frameTable: 78
+OSS: process 12800 has requesting page 19
+size of frameTable: 79
+OSS: process 12793 has requesting page 19
+size of frameTable: 80
+OSS: process 12803 has requesting page 3
+size of frameTable: 81
+OSS: process 12797 has requesting page 19
+size of frameTable: 82
+OSS: process 12789 has requesting page 11
+size of frameTable: 83
+OSS: process 12795 has requesting page 14
+size of frameTable: 84
+OSS: process 12792 has requesting page 0
+size of frameTable: 85
+OSS: process 12786 has requesting page 10
+size of frameTable: 86
+OSS: page found in frame 5OSS: process 12801 has requesting page 26
+size of frameTable: 86
+OSS: page found in frame 1OSS: process 12799 has requesting page 18
+size of frameTable: 86
+OSS: process 12794 has requesting page 21
+size of frameTable: 87
+OSS: process 12791 has requesting page 4
+size of frameTable: 88
+OSS: page found in frame 72OSS: process 12787 has requesting page 8
+size of frameTable: 88
+OSS: process 12802 has requesting page 24
+size of frameTable: 89
+OSS: process 12796 has requesting page 27
+size of frameTable: 90
+OSS: process 12790 has requesting page 30
+size of frameTable: 91
+OSS: process 12788 has requesting page 11
+size of frameTable: 92
+OSS: process 12798 has requesting page 8
+size of frameTable: 93
+OSS: process 12800 has requesting page 23
+size of frameTable: 94
+OSS: process 12793 has requesting page 2
+size of frameTable: 95
+OSS: page found in frame 64OSS: process 12803 has requesting page 0
+size of frameTable: 95
+OSS: process 12797 has requesting page 6
+size of frameTable: 96
+OSS: process 12789 has requesting page 3
+size of frameTable: 97
+OSS: process 12795 has requesting page 28
+size of frameTable: 98
+OSS: process 12792 has requesting page 12
+size of frameTable: 99
+OSS: process 12786 has requesting page 11
+size of frameTable: 100
+OSS: page found in frame 57OSS: process 12801 has requesting page 6
+size of frameTable: 100
+OSS: page found in frame 3OSS: process 12799 has requesting page 3
+size of frameTable: 100
+OSS: page found in frame 54OSS: process 12794 has requesting page 14
+size of frameTable: 100
+OSS: process 12791 has requesting page 25
+size of frameTable: 101
+OSS: process 12787 has requesting page 6
+size of frameTable: 102
+OSS: process 12802 has requesting page 25
+size of frameTable: 103
+OSS: process 12796 has requesting page 10
+size of frameTable: 104
+OSS: page found in frame 75OSS: process 12790 has requesting page 26
+size of frameTable: 104
+OSS: process 12788 has requesting page 30
+size of frameTable: 105
+OSS: process 12798 has requesting page 9
+size of frameTable: 106
+OSS: process 12800 has requesting page 16
+size of frameTable: 107
+OSS: process 12793 has requesting page 17
+size of frameTable: 108
+OSS: process 12803 has requesting page 28
+size of frameTable: 109
+OSS: process 12797 has requesting page 3
+size of frameTable: 110
+OSS: process 12789 has requesting page 19
+size of frameTable: 111
+OSS: process 12795 has requesting page 2
+size of frameTable: 112
+OSS: process 12792 has requesting page 13
+size of frameTable: 113
+OSS: process 12786 has requesting page 29
+size of frameTable: 114
+OSS: page found in frame 23OSS: process 12801 has requesting page 7
+size of frameTable: 114
+OSS: page found in frame 20OSS: process 12799 has requesting page 31
+size of frameTable: 114
+OSS: process 12794 has requesting page 5
+size of frameTable: 115
+OSS: process 12791 has requesting page 4
+size of frameTable: 116
+OSS: page found in frame 72OSS: process 12787 has requesting page 1
+size of frameTable: 116
+OSS: process 12802 has requesting page 28
+size of frameTable: 117
+OSS: process 12796 has requesting page 22
+size of frameTable: 118
+OSS: process 12790 has requesting page 24
+size of frameTable: 119
+OSS: process 12788 has requesting page 9
+size of frameTable: 120
+OSS: process 12798 has requesting page 13
+size of frameTable: 121
+OSS: process 12800 has requesting page 18
+size of frameTable: 122
+OSS: process 12793 has requesting page 21
+size of frameTable: 123
+OSS: process 12803 has requesting page 29
+size of frameTable: 124
+OSS: page found in frame 50OSS: process 12797 has requesting page 13
+size of frameTable: 124
+OSS: process 12789 has requesting page 23
+size of frameTable: 125
+OSS: process 12795 has requesting page 8
+size of frameTable: 126
+OSS: process 12792 has requesting page 10
+size of frameTable: 127
+OSS: process 12786 has requesting page 24
+size of frameTable: 128
+OSS: process 12801 has requesting page 15
+size of frameTable: 129
+OSS: process 12799 has requesting page 14
+size of frameTable: 130
+OSS: process 12794 has requesting page 11
+size of frameTable: 131
+OSS: page found in frame 26OSS: process 12791 has requesting page 26
+size of frameTable: 131
+OSS: process 12787 has requesting page 26
+size of frameTable: 132
+OSS: process 12802 has requesting page 24
+size of frameTable: 133
+OSS: page found in frame 89OSS: process 12796 has requesting page 9
+size of frameTable: 133
+OSS: page found in frame 59OSS: process 12790 has requesting page 31
+size of frameTable: 133
+OSS: process 12788 has requesting page 8
+size of frameTable: 134
+OSS: process 12798 has requesting page 14
+size of frameTable: 135
+OSS: process 12800 has requesting page 16
+size of frameTable: 136
+OSS: page found in frame 107OSS: process 12793 has requesting page 30
+size of frameTable: 136
+OSS: process 12803 has requesting page 9
+size of frameTable: 137
+OSS: page found in frame 34OSS: process 12797 has requesting page 8
+size of frameTable: 137
+OSS: page found in frame 51OSS: process 12789 has requesting page 12
+size of frameTable: 137
+OSS: page found in frame 19OSS: process 12795 has requesting page 15
+size of frameTable: 137
+OSS: process 12792 has requesting page 28
+size of frameTable: 138
+OSS: page found in frame 10OSS: process 12786 has requesting page 19
+size of frameTable: 138
+OSS: page found in frame 42OSS: process 12801 has requesting page 30
+size of frameTable: 138
+OSS: process 12799 has requesting page 19
+size of frameTable: 139
+OSS: process 12794 has requesting page 21
+size of frameTable: 140
+OSS: page found in frame 87OSS: process 12791 has requesting page 14
+size of frameTable: 140
+OSS: process 12787 has requesting page 29
+size of frameTable: 141
+OSS: process 12802 has requesting page 16
+size of frameTable: 142
+OSS: page found in frame 74OSS: process 12796 has requesting page 19
+size of frameTable: 142
+OSS: process 12790 has requesting page 3
+size of frameTable: 143
+OSS: process 12788 has requesting page 22
+size of frameTable: 144
+OSS: process 12798 has requesting page 21
+size of frameTable: 145
+OSS: process 12800 has requesting page 21
+size of frameTable: 146
+OSS: process 12793 has requesting page 12
+size of frameTable: 147
+OSS: process 12803 has requesting page 28
+size of frameTable: 148
+OSS: page found in frame 109OSS: process 12797 has requesting page 21
+size of frameTable: 148
+OSS: process 12789 has requesting page 10
+size of frameTable: 149
+OSS: process 12795 has requesting page 24
+size of frameTable: 150
+OSS: process 12792 has requesting page 1
+size of frameTable: 151
+OSS: process 12786 has requesting page 31
+size of frameTable: 152
+OSS: process 12801 has requesting page 23
+size of frameTable: 153
+OSS: process 12799 has requesting page 23
+size of frameTable: 154
+OSS: process 12794 has requesting page 31
+size of frameTable: 155
+OSS: process 12791 has requesting page 2
+size of frameTable: 156
+OSS: process 12787 has requesting page 3
+size of frameTable: 157
+OSS: process 12802 has requesting page 13
+size of frameTable: 158
+OSS: process 12796 has requesting page 27
+size of frameTable: 159
+OSS: page found in frame 90OSS: process 12790 has requesting page 25
+size of frameTable: 159
+OSS: process 12788 has requesting page 1
+size of frameTable: 160
+OSS: page found in frame 46OSS: process 12798 has requesting page 11
+size of frameTable: 160
+OSS: process 12800 has requesting page 4
+size of frameTable: 161
+OSS: page found in frame 63OSS: process 12793 has requesting page 29
+size of frameTable: 161
+OSS: page found in frame 49OSS: process 12803 has requesting page 25
+size of frameTable: 161
+OSS: process 12797 has requesting page 19
+size of frameTable: 162
+OSS: page found in frame 82OSS: process 12789 has requesting page 14
+size of frameTable: 162
+OSS: process 12795 has requesting page 26
+size of frameTable: 163
+OSS: process 12792 has requesting page 14
+size of frameTable: 164
+OSS: process 12786 has requesting page 25
+size of frameTable: 165
+OSS: page found in frame 2OSS: process 12801 has requesting page 16
+size of frameTable: 165
+OSS: process 12799 has requesting page 24
+size of frameTable: 166
+OSS: process 12794 has requesting page 23
+size of frameTable: 167
+OSS: process 12791 has requesting page 5
+size of frameTable: 168
+OSS: process 12787 has requesting page 17
+size of frameTable: 169
+OSS: process 12802 has requesting page 3
+size of frameTable: 170
+OSS: process 12796 has requesting page 20
+size of frameTable: 171
+OSS: process 12790 has requesting page 19
+size of frameTable: 172
+OSS: process 12788 has requesting page 7
+size of frameTable: 173
+OSS: process 12798 has requesting page 2
+size of frameTable: 174
+OSS: process 12800 has requesting page 30
+size of frameTable: 175
+OSS: page found in frame 18OSS: process 12793 has requesting page 25
+size of frameTable: 175
+OSS: process 12803 has requesting page 31
+size of frameTable: 176
+OSS: process 12797 has requesting page 7
+size of frameTable: 177
+OSS: page found in frame 35OSS: process 12789 has requesting page 25
+size of frameTable: 177
+OSS: process 12795 has requesting page 22
+size of frameTable: 178
+OSS: process 12792 has requesting page 23
+size of frameTable: 179
+OSS: page found in frame 4OSS: process 12786 has requesting page 16
+size of frameTable: 179
+OSS: process 12801 has requesting page 14
+size of frameTable: 180
+OSS: process 12799 has requesting page 20
+size of frameTable: 181
+OSS: process 12794 has requesting page 22
+size of frameTable: 182
+OSS: process 12791 has requesting page 25
+size of frameTable: 183
+OSS: page found in frame 101OSS: process 12787 has requesting page 15
+size of frameTable: 183
+OSS: process 12802 has requesting page 18
+size of frameTable: 184
+OSS: process 12796 has requesting page 12
+size of frameTable: 185
+OSS: process 12790 has requesting page 31
+size of frameTable: 186
+OSS: page found in frame 133OSS: process 12788 has requesting page 16
+size of frameTable: 186
+OSS: process 12798 has requesting page 25
+size of frameTable: 187
+OSS: process 12800 has requesting page 6
+size of frameTable: 188
+OSS: process 12793 has requesting page 25
+size of frameTable: 189
+OSS: page found in frame 175OSS: process 12803 has requesting page 17
+size of frameTable: 189
+OSS: process 12797 has requesting page 21
+size of frameTable: 190
+OSS: page found in frame 148OSS: process 12789 has requesting page 6
+size of frameTable: 190
+OSS: page found in frame 36OSS: process 12795 has requesting page 1
+size of frameTable: 190
+OSS: process 12792 has requesting page 14
+size of frameTable: 191
+OSS: page found in frame 164OSS: process 12786 has requesting page 30
+size of frameTable: 191
+OSS: process 12801 has requesting page 22
+size of frameTable: 192
+OSS: process 12799 has requesting page 20
+size of frameTable: 193
+OSS: page found in frame 181OSS: process 12794 has requesting page 12
+size of frameTable: 193
+OSS: process 12791 has requesting page 16
+size of frameTable: 194
+OSS: process 12787 has requesting page 18
+size of frameTable: 195
+OSS: process 12802 has requesting page 24
+size of frameTable: 196
+OSS: page found in frame 89OSS: process 12796 has requesting page 16
+size of frameTable: 196
+OSS: process 12790 has requesting page 21
+size of frameTable: 197
+OSS: process 12788 has requesting page 31
+size of frameTable: 198
+OSS: process 12798 has requesting page 0
+size of frameTable: 199
+OSS: process 12800 has requesting page 23
+size of frameTable: 200
+OSS: page found in frame 94OSS: process 12793 has requesting page 29
+size of frameTable: 200
+OSS: page found in frame 49OSS: process 12803 has requesting page 6
+size of frameTable: 200
+OSS: process 12797 has requesting page 14
+size of frameTable: 201
+OSS: process 12789 has requesting page 15
+size of frameTable: 202
+OSS: process 12795 has requesting page 29
+size of frameTable: 203
+OSS: process 12792 has requesting page 27
+size of frameTable: 204
+OSS: process 12786 has requesting page 31
+size of frameTable: 205
+OSS: page found in frame 152OSS: process 12801 has requesting page 17
+size of frameTable: 205
+OSS: process 12799 has requesting page 25
+size of frameTable: 206
+OSS: page found in frame 70OSS: process 12794 has requesting page 28
+size of frameTable: 206
+OSS: process 12791 has requesting page 0
+size of frameTable: 207
+OSS: process 12787 has requesting page 3
+size of frameTable: 208
+OSS: page found in frame 157OSS: process 12802 has requesting page 0
+size of frameTable: 208
+OSS: process 12796 has requesting page 9
+size of frameTable: 209
+OSS: page found in frame 59OSS: process 12790 has requesting page 8
+size of frameTable: 209
+OSS: page found in frame 60OSS: process 12788 has requesting page 25
+size of frameTable: 209
+OSS: process 12798 has requesting page 17
+size of frameTable: 210
+OSS: process 12800 has requesting page 23
+size of frameTable: 211
+OSS: page found in frame 94OSS: process 12793 has requesting page 26
+size of frameTable: 211
+OSS: process 12803 has requesting page 1
+size of frameTable: 212
+OSS: process 12797 has requesting page 17
+size of frameTable: 213
+OSS: process 12789 has requesting page 26
+size of frameTable: 214
+OSS: process 12795 has requesting page 4
+size of frameTable: 215
+OSS: process 12792 has requesting page 11
+size of frameTable: 216
+OSS: process 12786 has requesting page 12
+size of frameTable: 217
+OSS: process 12801 has requesting page 28
+size of frameTable: 218
+OSS: process 12799 has requesting page 15
+size of frameTable: 219
+OSS: process 12794 has requesting page 28
+size of frameTable: 220
+OSS: page found in frame 206OSS: process 12791 has requesting page 23
+size of frameTable: 220
+OSS: process 12787 has requesting page 25
+size of frameTable: 221
+OSS: process 12802 has requesting page 18
+size of frameTable: 222
+OSS: page found in frame 184OSS: process 12796 has requesting page 25
+size of frameTable: 222
+OSS: process 12790 has requesting page 24
+size of frameTable: 223
+OSS: page found in frame 119OSS: process 12788 has requesting page 20
+size of frameTable: 223
+OSS: process 12798 has requesting page 13
+size of frameTable: 224
+OSS: page found in frame 121OSS: process 12800 has requesting page 27
+size of frameTable: 224
+OSS: process 12793 has requesting page 9
+size of frameTable: 225
+OSS: process 12803 has requesting page 25
+size of frameTable: 226
+OSS: page found in frame 161OSS: process 12797 has requesting page 16
+size of frameTable: 226
+OSS: process 12789 has requesting page 18
+size of frameTable: 227
+OSS: process 12795 has requesting page 1
+size of frameTable: 228
+OSS: page found in frame 190OSS: process 12792 has requesting page 13
+size of frameTable: 228
+OSS: page found in frame 113OSS: process 12786 has requesting page 13
+size of frameTable: 228
+OSS: process 12801 has requesting page 1
+size of frameTable: 229
+OSS: process 12799 has requesting page 14
+size of frameTable: 230
+OSS: page found in frame 130OSS: process 12794 has requesting page 15
+size of frameTable: 230
+OSS: process 12791 has requesting page 29
+size of frameTable: 231
+OSS: process 12787 has requesting page 31
+size of frameTable: 232
+OSS: process 12802 has requesting page 9
+size of frameTable: 233
+OSS: process 12796 has requesting page 14
+size of frameTable: 234
+OSS: process 12790 has requesting page 6
+size of frameTable: 235
+OSS: process 12788 has requesting page 11
+size of frameTable: 236
+OSS: page found in frame 92OSS: process 12798 has requesting page 13
+size of frameTable: 236
+OSS: page found in frame 121OSS: process 12800 has requesting page 25
+size of frameTable: 236
+OSS: page found in frame 48OSS: process 12793 has requesting page 18
+size of frameTable: 236
+OSS: process 12803 has requesting page 17
+size of frameTable: 237
+OSS: page found in frame 189OSS: process 12797 has requesting page 15
+size of frameTable: 237
+OSS: process 12789 has requesting page 8
+size of frameTable: 238
+OSS: process 12795 has requesting page 10
+size of frameTable: 239
+OSS: process 12792 has requesting page 26
+size of frameTable: 240
+OSS: process 12786 has requesting page 28
+size of frameTable: 241
+OSS: page found in frame 25OSS: process 12801 has requesting page 25
+size of frameTable: 241
+OSS: process 12799 has requesting page 29
+size of frameTable: 242
+OSS: process 12794 has requesting page 2
+size of frameTable: 243
+OSS: process 12791 has requesting page 10
+size of frameTable: 244
+OSS: process 12787 has requesting page 15
+size of frameTable: 245
+OSS: page found in frame 183OSS: process 12802 has requesting page 14
+size of frameTable: 245
+OSS: process 12796 has requesting page 4
+size of frameTable: 246
+OSS: process 12790 has requesting page 22
+size of frameTable: 247
+OSS: process 12788 has requesting page 26
+size of frameTable: 248
+OSS: process 12798 has requesting page 25
+size of frameTable: 249
+OSS: page found in frame 187OSS: process 12800 has requesting page 7
+size of frameTable: 249
+OSS: process 12793 has requesting page 3
+size of frameTable: 250
+OSS: process 12803 has requesting page 20
+size of frameTable: 251
+OSS: process 12797 has requesting page 8
+size of frameTable: 252
+OSS: page found in frame 51OSS: process 12789 has requesting page 14
+size of frameTable: 252
+OSS: page found in frame 162OSS: process 12795 has requesting page 29
+size of frameTable: 252
+OSS: page found in frame 203OSS: process 12792 has requesting page 6
+size of frameTable: 252
+OSS: process 12786 has requesting page 8
+size of frameTable: 253
+OSS: process 12801 has requesting page 18
+size of frameTable: 254
+OSS: process 12799 has requesting page 4
+size of frameTable: 255
+OSS: process 12794 has requesting page 26
+size of frameTable: 256
+OSS: Page Fault! victim frame #0 in process 12786's page #9
+OSS: process 12791 has requesting page 28
+size of frameTable: 256
+OSS: Page Fault! victim frame #1 in process 12786's page #26
+OSS: process 12787 has requesting page 24
+size of frameTable: 256
+OSS: Page Fault! victim frame #2 in process 12786's page #25
+OSS: process 12802 has requesting page 25
+size of frameTable: 256
+OSS: page found in frame 103OSS: process 12796 has requesting page 20
+size of frameTable: 256
+OSS: page found in frame 171OSS: process 12790 has requesting page 25
+size of frameTable: 256
+OSS: page found in frame 159OSS: process 12788 has requesting page 19
+size of frameTable: 256
+OSS: Page Fault! victim frame #3 in process 12786's page #6
+OSS: process 12798 has requesting page 20
+size of frameTable: 256
+OSS: Page Fault! victim frame #4 in process 12792's page #23
+OSS: process 12800 has requesting page 23
+size of frameTable: 256
+OSS: page found in frame 94OSS: process 12793 has requesting page 24
+size of frameTable: 256
+OSS: Page Fault! victim frame #5 in process 12786's page #10
+OSS: process 12803 has requesting page 23
+size of frameTable: 256
+OSS: Page Fault! victim frame #6 in process 12790's page #2
+OSS: process 12797 has requesting page 20
+size of frameTable: 256
+OSS: Page Fault! victim frame #7 in process 12786's page #27
+OSS: process 12789 has requesting page 5
+size of frameTable: 256
+OSS: Page Fault! victim frame #8 in process 12788's page #5
+OSS: process 12795 has requesting page 27
+size of frameTable: 256
+OSS: page found in frame 37OSS: process 12792 has requesting page 15
+size of frameTable: 256
+OSS: Page Fault! victim frame #9 in process 12786's page #3
+OSS: process 12786 has requesting page 31
+size of frameTable: 256
+OSS: page found in frame 152OSS: process 12801 has requesting page 3
+size of frameTable: 256
+OSS: Page Fault! victim frame #10 in process 12792's page #28
+OSS: process 12799 has requesting page 13
+size of frameTable: 256
+OSS: Page Fault! victim frame #11 in process 12786's page #1
+OSS: process 12802 has requesting page 21
+size of frameTable: 256
+OSS: Page Fault! victim frame #12 in process 12786's page #17
+OSS: process 12800 has requesting page 13
+size of frameTable: 256
+OSS: Page Fault! victim frame #13 in process 12786's page #5
+OSS: process 12790 has requesting page 10
+size of frameTable: 256
+OSS: Page Fault! victim frame #14 in process 12794's page #4
+OSS: process 12786 has requesting page 11
+size of frameTable: 256
+OSS: page found in frame 57OSS: process 12796 has requesting page 14
+size of frameTable: 256
+OSS: page found in frame 234OSS: process 12795 has requesting page 21
+size of frameTable: 256
+OSS: Page Fault! victim frame #15 in process 12799's page #17
+OSS: process 12786 has requesting page 25
+size of frameTable: 256
+OSS: Page Fault! victim frame #16 in process 12786's page #23
+OSS: process 12796 has requesting page 6
+size of frameTable: 256
+OSS: Page Fault! victim frame #17 in process 12788's page #17
+OSS: process 12792 has requesting page 27
+size of frameTable: 256
+OSS: page found in frame 204OSS: process 12798 has requesting page 0
+size of frameTable: 256
+OSS: page found in frame 199OSS: process 12792 has requesting page 2
+size of frameTable: 256
+OSS: Page Fault! victim frame #18 in process 12800's page #30
+OSS: process 12798 has requesting page 5
+size of frameTable: 256
+OSS: Page Fault! victim frame #19 in process 12789's page #12
+OSS: process 12796 has requesting page 12
+size of frameTable: 256
+OSS: page found in frame 185OSS: process 12791 has requesting page 6
+size of frameTable: 256
+OSS: Page Fault! victim frame #20 in process 12786's page #7
+OSS: process 12800 has requesting page 4
+size of frameTable: 256
+OSS: page found in frame 63OSS: process 12796 has requesting page 4
+size of frameTable: 256
+OSS: page found in frame 246OSS: process 12800 has requesting page 28
+size of frameTable: 256
+OSS: Page Fault! victim frame #21 in process 12786's page #20
+OSS: process 12796 has requesting page 25
+size of frameTable: 256
+OSS: page found in frame 222OSS: process 12796 has requesting page 31
+size of frameTable: 256
+OSS: Page Fault! victim frame #22 in process 12792's page #17
+OSS: process 12795 has requesting page 6
+size of frameTable: 256
+OSS: Page Fault! victim frame #23 in process 12786's page #29
+OSS: process 12803 has requesting page 8
+size of frameTable: 256
+OSS: Page Fault! victim frame #24 in process 12799's page #0
+OSS: process 12794 has requesting page 21
+size of frameTable: 256
+OSS: page found in frame 87OSS: process 12794 has requesting page 26
+size of frameTable: 256
+OSS: page found in frame 0OSS: process 12794 has requesting page 27
+size of frameTable: 256
+OSS: Page Fault! victim frame #25 in process 12786's page #28
+OSS: process 12802 has requesting page 22
+size of frameTable: 256
+OSS: Page Fault! victim frame #26 in process 12794's page #11
+OSS: process 12798 has requesting page 2
+size of frameTable: 256
+OSS: page found in frame 174OSS: process 12798 has requesting page 7
+size of frameTable: 256
+OSS: Page Fault! victim frame #27 in process 12786's page #4
+OSS: process 12787 has requesting page 25
+size of frameTable: 256
+OSS: page found in frame 221OSS: process 12787 has requesting page 20
+size of frameTable: 256
+OSS: Page Fault! victim frame #28 in process 12786's page #22
+OSS: process 12800 has requesting page 9
+size of frameTable: 256
+OSS: Page Fault! victim frame #29 in process 12800's page #11
+OSS: process 12791 has requesting page 15
+size of frameTable: 256
+OSS: Page Fault! victim frame #30 in process 12793's page #11
+OSS: process 12799 has requesting page 8
+size of frameTable: 256
+OSS: Page Fault! victim frame #31 in process 12789's page #7
+OSS: process 12791 has requesting page 31
+size of frameTable: 256
+OSS: Page Fault! victim frame #32 in process 12800's page #3
+OSS: process 12800 has requesting page 16
+size of frameTable: 256
+OSS: page found in frame 107OSS: process 12800 has requesting page 25
+size of frameTable: 256
+OSS: page found in frame 48OSS: process 12800 has requesting page 2
+size of frameTable: 256
+OSS: Page Fault! victim frame #33 in process 12793's page #10
+OSS: process 12786 has requesting page 25
+size of frameTable: 256
+OSS: page found in frame 15OSS: process 12802 has requesting page 16
+size of frameTable: 256
+OSS: page found in frame 74OSS: process 12786 has requesting page 18
+size of frameTable: 256
+OSS: Page Fault! victim frame #34 in process 12803's page #9
+OSS: process 12802 has requesting page 25
+size of frameTable: 256
+OSS: page found in frame 103OSS: process 12802 has requesting page 22
+size of frameTable: 256
+OSS: page found in frame 25OSS: process 12802 has requesting page 18
+size of frameTable: 256
+OSS: page found in frame 184OSS: process 12802 has requesting page 7
+size of frameTable: 256
+OSS: Page Fault! victim frame #35 in process 12797's page #7
+OSS: process 12798 has requesting page 14
+size of frameTable: 256
+OSS: page found in frame 135OSS: process 12798 has requesting page 9
+size of frameTable: 256
+OSS: page found in frame 106OSS: process 12797 has requesting page 8
+size of frameTable: 256
+OSS: page found in frame 51OSS: process 12798 has requesting page 26
+size of frameTable: 256
+OSS: Page Fault! victim frame #36 in process 12789's page #6
+OSS: process 12797 has requesting page 19
+size of frameTable: 256
+OSS: page found in frame 82OSS: process 12797 has requesting page 3
+size of frameTable: 256
+OSS: page found in frame 110OSS: process 12793 has requesting page 6
+size of frameTable: 256
+OSS: Page Fault! victim frame #37 in process 12795's page #27
+OSS: process 12797 has requesting page 18
+size of frameTable: 256
+OSS: Page Fault! victim frame #38 in process 12792's page #24
+OSS: process 12792 has requesting page 3
+size of frameTable: 256
+OSS: Page Fault! victim frame #39 in process 12786's page #14
+OSS: process 12798 has requesting page 31
+size of frameTable: 256
+OSS: Page Fault! victim frame #40 in process 12799's page #6
+OSS: process 12798 has requesting page 20
+size of frameTable: 256
+OSS: page found in frame 3OSS: process 12792 has requesting page 22
+size of frameTable: 256
+OSS: Page Fault! victim frame #41 in process 12794's page #10
+OSS: process 12798 has requesting page 14
+size of frameTable: 256
+OSS: page found in frame 135OSS: process 12798 has requesting page 23
+size of frameTable: 256
+OSS: Page Fault! victim frame #42 in process 12786's page #19
+OSS: process 12803 has requesting page 15
+size of frameTable: 256
+OSS: Page Fault! victim frame #43 in process 12802's page #31
+OSS: process 12802 has requesting page 13
+size of frameTable: 256
+OSS: page found in frame 158OSS: process 12787 has requesting page 23
+size of frameTable: 256
+OSS: Page Fault! victim frame #44 in process 12796's page #30
+OSS: process 12802 has requesting page 31
+size of frameTable: 256
+OSS: Page Fault! victim frame #45 in process 12790's page #27
+OSS: process 12788 has requesting page 9
+size of frameTable: 256
+OSS: page found in frame 120OSS: process 12788 has requesting page 1
+size of frameTable: 256
+OSS: page found in frame 46OSS: process 12800 has requesting page 4
+size of frameTable: 256
+OSS: page found in frame 63OSS: process 12800 has requesting page 23
+size of frameTable: 256
+OSS: page found in frame 94OSS: process 12788 has requesting page 24
+size of frameTable: 256
+OSS: page found in frame 61OSS: process 12788 has requesting page 27
+size of frameTable: 256
+OSS: P
