@@ -1,0 +1,10 @@
+do the stats
+
+fill the pcb.waitNano and pcb.waitSecond with the finish times
+
+enqueue the bitindex
+
+check later to see if any of them passed
+
+if none of them passed and the size of queue is 18 or more
+skip to the time of the first one.

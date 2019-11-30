@@ -27,6 +27,8 @@ struct PageTable{
 struct PCB{
         pid_t simPID;
 	struct PageTable pgTable[32];
+	unsigned int waitSecond;
+	unsigned int waitNano
 };
 //Struct for the Resource Descriptor
 struct RD{

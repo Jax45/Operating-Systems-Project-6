@@ -36,10 +36,13 @@ increments the clock and loops back.
 #define BETA 1
 #define NUM_RES 20
 //global var.
+int memAccess = 0;
+int pgFaults = 0;
 int processes = 0;
 char bound[20];
 bool verbose = false;
 int currentSecond = 0;
+double currentTime = 0;
 //prototypes
 void exitSafe(int);
 bool isSafe(int,FILE*);
@@ -71,7 +74,15 @@ void timerHandler(int sig){
 	printf("Process has ended due to timeout");//, Processses finished: %d, time passed: %Lf\n",processes,passedTime);
 	//printf("OSS: it takes about %Lf seconds to generate and finish one process \n",througput);
 	//printf("OSS: throughput = %Lf\n",processes / passedTime);
-	//fflush(stdout);
+	printf("Number of processes: %d\n",processes);
+	printf("Number of memory accesses: %d\n",memAccess);
+	printf("Number of page faults: %d\n",pgFaults);
+	printf("Simulated time: %f\n",currentTime);
+	printf("Memory access per second: %f\n;",(double)memAccess/currentTime);
+	printf("Page fault per memory access: %f\n",(double)pgFaults/memAccess);
+	//average
+	//total
+	fflush(stdout);
 	//get the pids so we can kill the children
 	int i = 0;
 	shmpcb = (struct PCB*) shmat(shmidPCB,(void*)0,0);
@@ -127,7 +138,7 @@ int main(int argc, char **argv){
 	//const int BETA = 1;
 	int opt;
 	//get the options from the user.
-	while((opt = getopt (argc, argv, "ht:vb:")) != -1){
+	while((opt = getopt (argc, argv, "ht:o:")) != -1){
 		switch(opt){
 			case 'h':
 				printf("Usage: ./oss [-t [timeout in seconds]] [-o [1 for fifo and 0 for LRU ]\n");
@@ -135,11 +146,8 @@ int main(int argc, char **argv){
 			case 't':
 				timeout = atoi(optarg);
 				break;
-			case 'v':
-				verbose = true;
-				break;
 			case 'o':
-                                if(optarg > 0){
+                                if(atoi(optarg) > 0){
 					fifo = true;
 				}
 				else {
@@ -280,6 +288,12 @@ int main(int argc, char **argv){
 	//Frame Table
 	struct Queue *fTable = createQueue();
 	
+
+	//queue to keep track of pending 14ms requests
+	struct Queue *pending = createQueue();
+	//key is bit index
+	//frame is not needed
+	
 	while(1){
 		//check if we need to launch the processes
 		
@@ -367,20 +381,32 @@ int main(int argc, char **argv){
 			else{
 				//not terminateing
 				if((strcmp(message.mesg_text,"Read")) == 0 || (strcmp(message.mesg_text,"Write")) == 0){
+					int address = message.page;
+					message.page = message.page >> 10;
+					
 					bool write = false;
+					memAccess++;
 					if((strcmp(message.mesg_text,"Write")) == 0){
 						write = true;
 					}
 					//printf("Message Received Read Request");
 					message.mesg_type = message.pid;
-					fprintf(fp,"OSS: process %lld has requesting page %u\n",message.pid,message.page);
+					fprintf(fp,"OSS: process %lld has requesting page %u",message.pid,message.page);
+					if(write){
+						fprintf(fp, " for a Write operation.\n");
+					}
+					else{
+						fprintf(fp, " for a Read operation.\n");
+					}
 					r_semop(semid, semwait, 1);
                                         bool fault = false;
+                                        shmclock = (struct Clock*) shmat(shmid, (void*)0,0);
+
 					shmpcb = (struct PCB*) shmat(shmidPCB, (void*)0,0);
 					struct Node* victim;
 					int vicIndex, vicFrame;
 					//check to see if the page is in frame
-					fprintf(fp,"size of frameTable: %d\n",sizeOfQueue(fTable));
+					//fprintf(fp,"size of frameTable: %d\n",sizeOfQueue(fTable));
 				//	printFrameTable(fTable,fp);
 					if(shmpcb[message.bitIndex].pgTable[message.page].valid != 1){
 						
@@ -389,14 +415,32 @@ int main(int argc, char **argv){
 						int newFrame = getFrameNumber(fTable);
 						//check to see if the frames are all taken
 						if(sizeOfQueue(fTable) == 256){
+							//shmclock = (struct Clock*) shmat(shmid, (void*)0,0);
+							//get current time
+							shmpcb[message.bitIndex].waitNano = shmclock->nano;
+                                                        shmpcb[message.bitIndex].waitSecond = shmclock->second;
+
+							unsigned int incr = 14000000;
+							if(shmclock->nano >= 1000000000 - incr){
+								shmpcb[message.bitIndex].waitSecond += shmpcb[message.bitIndex].waitNano / 1000000000;
+								shmpcb[message.bitIndex].waitNano += shmpcb[message.bitIndex].waitNano % 1000000000;
+							}
+							else{
+								shmpcb[message.bitIndex].waitNano = shmclock->nano + incr;
+								shmpcb[message.bitIndex].waitSecond = shmclock->second;
+							}
 							fault = true;
+							pgFaults++;
 							//choose a victim frame
 							//int vicIndex = 0, vicFrame = 0;
 							//if(fifo){
 							victim = deQueue(fTable);
 							enQueue(fTable,message.bitIndex,newFrame);
 							shmpcb[message.bitIndex].pgTable[message.page].valid = 1;
-                                                        shmpcb[message.bitIndex].pgTable[message.page].address = newFrame;
+							if(write){
+                                                        	shmpcb[message.bitIndex].pgTable[message.page].dirty = 1;
+                                                        }
+							shmpcb[message.bitIndex].pgTable[message.page].address = newFrame;
 
 							//}
 							//else{
@@ -409,12 +453,18 @@ int main(int argc, char **argv){
 						else{
 							enQueue(fTable,message.bitIndex,newFrame);
 							shmpcb[message.bitIndex].pgTable[message.page].valid = 1;
-                                                        shmpcb[message.bitIndex].pgTable[message.page].address = newFrame;
+                                                        if(write){
+                                                                shmpcb[message.bitIndex].pgTable[message.page].dirty = 1;
+                                                        }
+
+							shmpcb[message.bitIndex].pgTable[message.page].address = newFrame;
 							//incrementClock(fp);
 						}
 					}
 					else{
-						fprintf(fp,"OSS: page found in frame %d",shmpcb[message.bitIndex].pgTable[message.page].address);
+						fprintf(fp,"OSS: address %d is in frame %d giving data to Process %d at time %d:%d",address,shmpcb[message.bitIndex].pgTable[message.page].address,shmpcb[message.bitIndex].simPID,shmclock->second,shmclock->nano);
+					
+						fprintf(fp,"OSS: address %d is in frame %d writing data to Process %d at time %d:%d",address,shmpcb[message.bitIndex].pgTable[message.page].address,shmpcb[message.bitIndex].simPID,shmclock->second,shmclock->nano);
 						//page is in frame already
 						if(!fifo){
 							struct Node* n = deQueue(fTable);
@@ -434,19 +484,19 @@ int main(int argc, char **argv){
 							}
 						}
 					}
+					shmdt(shmclock);
 					shmdt(shmpcb);
 					r_semop(semid,semsignal,1);
 					
 					message.pid = message.pid;
 					if(fault){
-						sprintf(message.mesg_text,"Page Fault");
-						
+						//sprintf(message.mesg_text,"Page Fault");
+						enQueue(pending,message.bitIndex,0);		
 					}
 					else{
 						sprintf(message.mesg_text,"No Fault");
+						msgsnd(msgid, &message, sizeof(message),0);
 					}
-					msgsnd(msgid, &message, sizeof(message),0);
-						
 				}
 
 			}
@@ -455,7 +505,61 @@ int main(int argc, char **argv){
 			errno = 0;
 		//	printf("No message Received increment clock and loop back\n");
 		}
-		r_semop(semid,semsignal,1);
+		
+
+		r_semop(semid,semwait,1);
+                shmclock = (struct Clock*) shmat(shmid, (void*)0,0);
+                shmpcb = (struct PCB*) shmat(shmidPCB, (void*)0,0);
+                struct Node * n = pending->front;
+		int size = sizeOfQueue(pending);
+		if(n != NULL){
+			//if the size is 18 speed up to prevent deadlock
+			//speed up to first in queue.
+			int sec = shmpcb[n->key].waitSecond;
+	                int nano = shmpcb[n->key].waitNano;
+	
+			if(size >= 17){
+                		shmclock->second = sec;
+                	        shmclock->nano = nano + 10;
+                	}
+		}
+		int i;
+		//Check the pending pagefaults
+		for(i=0;i<size;i++){
+	//		struct Node * n = pending->front;
+			if(n != NULL){
+				//check to see if time passed
+				unsigned int sec = shmpcb[n->key].waitSecond;
+				unsigned int nano = shmpcb[n->key].waitNano;
+				if((sec == shmclock->second && nano < shmclock->nano) || sec < shmclock->second){
+					//send message
+					message.pid = shmpcb[n->key].simPID;
+					message.mesg_type = message.pid;
+					sprintf(message.mesg_text,"Page Fault");
+                                        msgsnd(msgid, &message, sizeof(message),0);
+	
+					//dequeue
+					int tmp = deQueue(pending);
+					n = n->next;	
+				}
+				else{
+					//Time has not passed yet check next one
+					n = n->next;	
+				}
+			}
+			else{
+				// n is null
+				break;
+			}
+		}
+		shmdt(shmclock);
+                shmdt(shmpcb);
+                
+                r_semop(semid,semsignal,1);
+
+
+
+
 		//if not then just increment clock and loop back
 		incrementClock(fp);	
 	}
@@ -487,7 +591,7 @@ void incrementClock(FILE * fp){
                 else{
 			/*make sure we convert the nanoseconds to seconds after it gets large enough*/
 			shmclock = (struct Clock*) shmat(shmid, (void*)0,0);
-                        unsigned int increment = 100;//(unsigned int)rand() % 1000 + 5000000;
+                        unsigned int increment = 10;//(unsigned int)rand() % 1000 + 5000000;
                         if(shmclock->nano >= 1000000000 - increment){
                                 shmclock->second += (unsigned int)(shmclock->nano / (unsigned int)1000000000);
                                 shmclock->nano = (unsigned int)(shmclock->nano % (unsigned int)1000000000) + increment;
@@ -503,7 +607,7 @@ void incrementClock(FILE * fp){
 				currentSecond = shmclock->second;
 				fprintf(fp,"OSS: Current Time: %d:%d\n",shmclock->second,shmclock->nano);
 			}
-
+			currentTime = (double)shmclock->second + ((double)shmclock->nano / 1000000000.0);
 			//printf("Current Time: %d:%d\n",shmclock->second,shmclock->nano);
                         shmdt(shmclock);
                         if (r_semop(semid, semsignal, 1) == -1) {

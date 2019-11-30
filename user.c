@@ -144,7 +144,7 @@ int main(int argc, char  **argv) {
 		//request for write
 		requests++;
 		message.mesg_type = 1;
-                message.page = address >> 10;
+                message.page = address;// >> 10;
                 message.pid = getpid();
 		message.bitIndex = bitIndex;
                 sprintf(message.mesg_text, "Write");
@@ -168,7 +168,7 @@ int main(int argc, char  **argv) {
 		exit(1);
 
 	}
-	if((strcmp(message.mesg_text,"Page Fault")) == 0){
+	/*if(false &&(strcmp(message.mesg_text,"Page Fault")) == 0){
 		bool isWaiting = true;
 		bool firstTime = true;
 		struct Clock execute;
@@ -193,7 +193,7 @@ int main(int argc, char  **argv) {
 	                shmdt(shmclock);
 	                r_semop(semid, semsignal, 1);
 		}
-        }
+        }*/
 	//continue back.	
     }
     return 0;
