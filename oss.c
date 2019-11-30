@@ -74,6 +74,21 @@ void timerHandler(int sig){
 	printf("Process has ended due to timeout");//, Processses finished: %d, time passed: %Lf\n",processes,passedTime);
 	//printf("OSS: it takes about %Lf seconds to generate and finish one process \n",througput);
 	//printf("OSS: throughput = %Lf\n",processes / passedTime);
+	FILE * fp;
+	if(fifo){
+		fp = fopen("fifolog.txt", "w");
+	}
+	else{
+		fp = fopen("lrulog.txt", "w");
+	}
+	fprintf(fp,"Number of processes: %d\n",processes);
+        fprintf(fp,"Number of memory accesses: %d\n",memAccess);
+        fprintf(fp,"Number of page faults: %d\n",pgFaults);
+        fprintf(fp,"Simulated time: %f\n",currentTime);
+        fprintf(fp,"Memory access per second: %f\n;",(double)memAccess/currentTime);
+        fprintf(fp,"Page fault per memory access: %f\n",(double)pgFaults/memAccess);
+	fclose(fp);
+
 	printf("Number of processes: %d\n",processes);
 	printf("Number of memory accesses: %d\n",memAccess);
 	printf("Number of page faults: %d\n",pgFaults);
@@ -383,7 +398,7 @@ int main(int argc, char **argv){
 				if((strcmp(message.mesg_text,"Read")) == 0 || (strcmp(message.mesg_text,"Write")) == 0){
 					int address = message.page;
 					message.page = message.page >> 10;
-					
+					fprintf(fp,"Address received: %d, Page: %d\n",address,message.page);	
 					bool write = false;
 					memAccess++;
 					if((strcmp(message.mesg_text,"Write")) == 0){
@@ -458,13 +473,20 @@ int main(int argc, char **argv){
                                                         }
 
 							shmpcb[message.bitIndex].pgTable[message.page].address = newFrame;
+							
+							//still a page fault
+							fprintf(fp,"OSS: Page Fault! address %d not in frame\n",address);
+							printf("OSS: Page Fault! address %d not in frame\n",address);	
+							pgFaults++;
 							//incrementClock(fp);
 						}
 					}
 					else{
-						fprintf(fp,"OSS: address %d is in frame %d giving data to Process %d at time %d:%d",address,shmpcb[message.bitIndex].pgTable[message.page].address,shmpcb[message.bitIndex].simPID,shmclock->second,shmclock->nano);
-					
-						fprintf(fp,"OSS: address %d is in frame %d writing data to Process %d at time %d:%d",address,shmpcb[message.bitIndex].pgTable[message.page].address,shmpcb[message.bitIndex].simPID,shmclock->second,shmclock->nano);
+						if(!write){
+						fprintf(fp,"OSS: address %d is in frame %d giving data to Process %d at time %d:%d\n",address,shmpcb[message.bitIndex].pgTable[message.page].address,shmpcb[message.bitIndex].simPID,shmclock->second,shmclock->nano);
+						}else{
+						fprintf(fp,"OSS: address %d is in frame %d writing data to Process %d at time %d:%d\n",address,shmpcb[message.bitIndex].pgTable[message.page].address,shmpcb[message.bitIndex].simPID,shmclock->second,shmclock->nano);
+						}
 						//page is in frame already
 						if(!fifo){
 							struct Node* n = deQueue(fTable);
