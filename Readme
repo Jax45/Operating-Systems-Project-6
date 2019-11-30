@@ -17,6 +17,8 @@ every 1 second the allocation of the frame table is shown. Every 1000 memory acc
 if it does randomly choose to terminate then the memory is deallocated and the page table and frame table are updated to see that.
 
 NOTE:
+	When displaying the allocation of the frame table the frame number is displayed if it is allocated, and
+	if it is deallocated but in the table then it is displayed as a '.' 
 	See assumptions for more details.
 
 --------------------------------------------------------------------------
@@ -39,7 +41,7 @@ How to run:
 -----------------------------------------------------------------------------
 $ make clean
 $ make
-$ ./oss [-t Time in Seconds before timeout] [-p Limit of concurrent processes] [-o [0 for FIFO][1 for LRU]
+$ ./oss [-t Time in Seconds before timeout] [-p Limit of concurrent processes] [-o [1 for FIFO][0 for LRU]
 
 to see LRU
 $ ./oss -o 1

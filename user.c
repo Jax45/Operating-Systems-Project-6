@@ -1,18 +1,14 @@
 //Name: Jackson Hoenig
 //Class: CMP-SCI 4760
 /*Description:
-
-When the user is forked off, it first calculates a time that it will run
-an event based on the shared memory clock and the bound given in the options of OSS.
-when that event time passes a number from 0-2 is generated(0 only possible after 1 second)
-0 means terminate and a message is sent to OSS to let it know.
-1 means request and it awaits its request granted by waiting on shared memory.
-2 means release and it waits on the shared memory for the OSS to tell it
-that is is done releasing memory. then the process loops until a 0 is rolled or
-the OSS kills it.
-
-NOTE: to make the project look more life like the 0 is forced if the process
-has received all of its max claims of resources.
+ *
+ *     This user process is called from the OSS as a child process. its purpose is to request memory pages from its page
+ *     table in its Process control block. the request is randomly calculated to be a read or write request.
+ *     if it is a write it sends back the appropriate message as with the read request.
+ *     if it is a read or write request a random number from 0 to 32k is calculated to simulate the address.
+ *     then that address is sent back and a message is waited upon for that request to be fulfilled.
+ *     after 1000 requests granted it checks to see if it randomly terminates.
+ * 
 */
 #include <stdlib.h>
 #include <unistd.h>
@@ -37,11 +33,11 @@ int main(int argc, char  **argv) {
 	struct sembuf semwait[1];
 	//int error;	
 	//get IPC data.	
-	int shmid = atoi(argv[1]);	
+	//int shmid = atoi(argv[1]);	
 	int semid = atoi(argv[2]);
 	int msgid = atoi(argv[3]);
-	int shmidPID = atoi(argv[4]);
-	int shmidpcb = atoi(argv[5]);
+	//int shmidPID = atoi(argv[4]);
+	//int shmidpcb = atoi(argv[5]);
 	int bitIndex = atoi(argv[6]);
 //	int shmidrd = atoi(argv[7]);	
 //        int bound = atoi(argv[8]);
@@ -49,8 +45,6 @@ int main(int argc, char  **argv) {
                 perror("Error: user: Failed to create a private semaphore");
                 exit(1);
         }	
-	//initialize purpose
-	int purpose = 0;
 	setsembuf(semwait, 0, -1, 0);
 	setsembuf(semsignal, 0, 1, 0);
 	

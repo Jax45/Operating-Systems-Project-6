@@ -4,13 +4,16 @@
  * Project 5
  * Description:
  *In this program, the Operating system simulator starts by allocating shared memory
-for the Resource Descriptor array of 20. about 20% of those are then declared sharable and
-each class gets a total number of 1-10 that can be used. then at random time intervals
-child processes are forked off. then the OSS checks to see if any messages are waiting from the
-children. if not it checks to see if there are any pending requests. if there are, the
-request is evaluated to be safe or not.(see Banker Algorithm below) if it is safe it is
-the process is told by changing the shared memory to its child pid. finally the OSS
-increments the clock and loops back.
+for the Process Control block that has access to a page table of size 32k with each page being
+1k large. the total size of the operating system has access to is assumed to be 256k. which is kept track
+of as frames in a fTable (frame table) of size 256. at random times from 1-500 nanoseconds a process is forked.
+then that process can request for a read or write of a page. the OSS receives this message and checks to see if
+it is memory of the frame table. if it is then it is given access and 1 is set for the dirty bit if it is a write.
+if it is not in the table then a pagefault occurs and the process waits in a queue until 14ms of logical time have passed.
+if all of the max processes are full then the clock is sped up to the first waiting process.
+every 1 second the allocation of the frame table is shown. Every 1000 memory accesses a process has the chance to terminate
+if it does randomly choose to terminate then the memory is deallocated and the page table and frame table are updated to see that.
+
 
  * *************************************************************************************
 */
@@ -87,7 +90,7 @@ void timerHandler(int sig){
         fprintf(fp,"Number of memory accesses: %d\n",memAccess);
         fprintf(fp,"Number of page faults: %d\n",pgFaults);
         fprintf(fp,"Simulated time: %f\n",currentTime);
-        fprintf(fp,"Memory access per second: %f\n;",(double)memAccess/currentTime);
+        fprintf(fp,"Memory access per second: %f\n",(double)memAccess/currentTime);
         fprintf(fp,"Page fault per memory access: %f\n",(double)pgFaults/memAccess);
 	fclose(fp);
 
@@ -95,8 +98,15 @@ void timerHandler(int sig){
 	printf("Number of memory accesses: %d\n",memAccess);
 	printf("Number of page faults: %d\n",pgFaults);
 	printf("Simulated time: %f\n",currentTime);
-	printf("Memory access per second: %f\n;",(double)memAccess/currentTime);
+	printf("Memory access per second: %f\n",(double)memAccess/currentTime);
 	printf("Page fault per memory access: %f\n",(double)pgFaults/memAccess);
+	if(fifo){
+		printf("\nData above stored in fifolog.txt\n");
+	}
+	else{
+                printf("\nData above stored in lrulog.txt\n");
+	}
+	printf("Extra log data in \"log.txt\"\n");
 	//average
 	//total
 	fflush(stdout);
@@ -187,6 +197,15 @@ int main(int argc, char **argv){
 	//set the countdown until the timeout right away.
 	alarm(timeout);
         signal(SIGALRM,timerHandler);
+	
+	//prints
+	if(fifo){
+		printf("Simulating the First in first out (FIFO) method\n");
+	}
+	else{
+                printf("Simulating the Least Recently Used (LRU) method\n");
+
+	}
 	
 	//get shared memory for clock
 	key_t key = ftok("./oss",45);
@@ -301,7 +320,6 @@ int main(int argc, char **argv){
 	//for limit purposes.
 	int lines = 0;
 	processes = 0;
-	int grantedRequests = 0;
 	shmpid = (struct Dispatch*) shmat(shmidPID,(void*)0,0);
 	struct Clock launchTime;
 	launchTime.second = 0;
@@ -383,7 +401,7 @@ int main(int argc, char **argv){
                         		fprintf(fp,"OSS: Generating process %d with pid %lld at time %d:%d\n",processes,(long long)pid,shmclock->second,shmclock->nano);
 					}
 					fflush(fp);	
-					printf("OSS: Generating process %d with pid %lld at time %d:%d\n",processes,(long long)pid,shmclock->second,shmclock->nano);
+					//printf("OSS: Generating process %d with pid %lld at time %d:%d\n",processes,(long long)pid,shmclock->second,shmclock->nano);
 					processes++;
                        		        //Setting up the PCB
                        		        shmpcb = (struct PCB*) shmat(shmidPCB, (void*)0,0);
@@ -408,17 +426,33 @@ int main(int argc, char **argv){
 			if((strcmp(message.mesg_text,"Done")) == 0){
 				//reset bit map
 				resetBit(bitMap,message.bitIndex);
-				printf("Message received Done");
-				fprintf(fp,"OSS: process %lld has terminated Releasing memory\n",message.pid);
+				//printf("Message received Done");
+				fprintf(fp,"OSS: process %lld has terminated Releasing memory\n",(long long)message.pid);
+				printf("OSS: process %lld has terminated Releasing memory\n",(long long)message.pid);
 				int status = 0;
                                 waitpid(message.pid, &status, 0);
 				//deallocate the memory
 				int j;
+				r_semop(semid,semwait,1);
+                                shmpcb = (struct PCB*) shmat(shmidPCB, (void*)0,0);
+
 				for(j=0;j<32;j++){
-					if(shmpcb[message.bitIndex].pgTable[j].valid){
-						int addr = shmpcb[message].bitIndex.pgTable[j].address;
-						
+					if(shmpcb[message.bitIndex].pgTable[j].valid == 1){
+						int addr = shmpcb[message.bitIndex].pgTable[j].address;
+						shmpcb[message.bitIndex].pgTable[j].address = 0;
+						shmpcb[message.bitIndex].pgTable[j].valid = 0;
+						shmpcb[message.bitIndex].pgTable[j].dirty = 0;
+						struct Node* n = fTable->front;
+						while(n != NULL){
+							if(n->key == message.bitIndex && addr == n->frame){
+								n->key = -1;
+							}
+							n = n->next;
+						}	
 					}
+				}
+				shmdt(shmpcb);
+				r_semop(semid,semsignal,1);
 			}
 			else{
 				//not terminateing
@@ -433,7 +467,7 @@ int main(int argc, char **argv){
 					}
 					//printf("Message Received Read Request");
 					message.mesg_type = message.pid;
-					fprintf(fp,"OSS: process %lld has requesting page %u",message.pid,message.page);
+					fprintf(fp,"OSS: process %lld has requesting page %u",(long long)message.pid,message.page);
 					if(write){
 						fprintf(fp, " for a Write operation.\n");
 					}
@@ -475,6 +509,11 @@ int main(int argc, char **argv){
 							//int vicIndex = 0, vicFrame = 0;
 							//if(fifo){
 							victim = deQueue(fTable);
+							//make sure we have a valid victim.
+							while(victim->key == -1){
+								enQueue(fTable,victim->key,victim->frame);
+								victim = deQueue(fTable);
+							}
 							enQueue(fTable,message.bitIndex,newFrame);
 							shmpcb[message.bitIndex].pgTable[message.page].valid = 1;
 							if(write){
@@ -501,7 +540,7 @@ int main(int argc, char **argv){
 							
 							//still a page fault
 							fprintf(fp,"OSS: Page Fault! address %d not in frame\n",address);
-							printf("OSS: Page Fault! address %d not in frame\n",address);	
+							//printf("OSS: Page Fault! address %d not in frame\n",address);	
 							pgFaults++;
 						}
 					}
@@ -539,10 +578,10 @@ int main(int argc, char **argv){
 						//handle victim
 						int j;
 						for(j=0;j<32;j++){
-							if(shmpcb[vicIndex].pgTable[j].address == vicFrame && shmpcb[vicIndex].pgTable[j].valid == true){ 
-								shmpcb[vicIndex].pgTable[j].valid = false;
-								fprintf(fp,"OSS: Page Fault! victim frame #%d in process %lld's page #%d\n",vicFrame,shmpcb[vicIndex].simPID,j);
-								printf("OSS: Page Fault! victim frame #%d in process %lld's page #%d\n",vicFrame,shmpcb[vicIndex].simPID,j);
+							if(shmpcb[vicIndex].pgTable[j].address == vicFrame && shmpcb[vicIndex].pgTable[j].valid == 1){ 
+								shmpcb[vicIndex].pgTable[j].valid = 0;
+								fprintf(fp,"OSS: Page Fault! victim frame #%d in process %lld's page #%d\n",vicFrame,(long long)shmpcb[vicIndex].simPID,j);
+								//printf("OSS: Page Fault! victim frame #%d in process %lld's page #%d\n",vicFrame,shmpcb[vicIndex].simPID,j);
 								break;
 							}
 						}
@@ -602,7 +641,7 @@ int main(int argc, char **argv){
                                         msgsnd(msgid, &message, sizeof(message),0);
 	
 					//dequeue
-					int tmp = deQueue(pending);
+					deQueue(pending);
 					n = n->next;	
 				}
 				else{
