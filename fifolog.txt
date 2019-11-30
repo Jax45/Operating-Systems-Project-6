@@ -1,6 +1,6 @@
-Number of processes: 33
-Number of memory accesses: 59188
-Number of page faults: 3628
-Simulated time: 24084.998524
-Memory access per second: 2.457463
-;Page fault per memory access: 0.061296
+Number of processes: 18
+Number of memory accesses: 5042
+Number of page faults: 1050
+Simulated time: 1116.995307
+Memory access per second: 4.513895
+;Page fault per memory access: 0.208251

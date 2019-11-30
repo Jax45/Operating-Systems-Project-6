@@ -143,14 +143,16 @@ void exitSafe(int id){
 }
 
 void printTable(FILE *fp);
-void incrementClock(FILE *fp);
+void incrementClock(FILE *fp,const struct Queue* q);
 //Global for increment clock
 struct sembuf semwait[1];
 struct sembuf semsignal[1];
 
 
 int main(int argc, char **argv){
-        snprintf(bound, sizeof(bound), "%d", 250);
+	//queue to keep track of pending 14ms requests
+        struct Queue *pending = createQueue();
+	snprintf(bound, sizeof(bound), "%d", 250);
 	//const int ALPHA = 1;
 	//const int BETA = 1;
 	int opt;
@@ -310,8 +312,6 @@ int main(int argc, char **argv){
 	struct Queue *fTable = createQueue();
 	
 
-	//queue to keep track of pending 14ms requests
-	struct Queue *pending = createQueue();
 	//key is bit index
 	//frame is not needed
 	
@@ -409,16 +409,16 @@ int main(int argc, char **argv){
 				//reset bit map
 				resetBit(bitMap,message.bitIndex);
 				printf("Message received Done");
-				fprintf(fp,"OSS: process %lld has terminated\n",message.pid);
+				fprintf(fp,"OSS: process %lld has terminated Releasing memory\n",message.pid);
 				int status = 0;
                                 waitpid(message.pid, &status, 0);
 				//deallocate the memory
-				//int j;
-				//for(j=0;j<32;j++){
-				//	if(shmpcb[message.bitIndex].pgTable[j].valid){
-				//		int addr = shmpcb[message].bitIndex.pgTable[j].address;
-				//		
-				//	}
+				int j;
+				for(j=0;j<32;j++){
+					if(shmpcb[message.bitIndex].pgTable[j].valid){
+						int addr = shmpcb[message].bitIndex.pgTable[j].address;
+						
+					}
 			}
 			else{
 				//not terminateing
@@ -448,8 +448,6 @@ int main(int argc, char **argv){
 					struct Node* victim;
 					int vicIndex, vicFrame;
 					//check to see if the page is in frame
-					//fprintf(fp,"size of frameTable: %d\n",sizeOfQueue(fTable));
-				//	printFrameTable(fTable,fp);
 					if(shmpcb[message.bitIndex].pgTable[message.page].valid != 1){
 						
 						//choose new frame number
@@ -505,7 +503,6 @@ int main(int argc, char **argv){
 							fprintf(fp,"OSS: Page Fault! address %d not in frame\n",address);
 							printf("OSS: Page Fault! address %d not in frame\n",address);	
 							pgFaults++;
-							//incrementClock(fp);
 						}
 					}
 					else{
@@ -517,25 +514,26 @@ int main(int argc, char **argv){
 						//page is in frame already
 						
 						//if dirty bit make sure to add 10ms to clock
+						//otherwise make it 10 ns.
+						unsigned int increment = 10;
+						
 						if(shmpcb[message.bitIndex].pgTable[message.page].dirty == 1){
-							unsigned int increment = 10000000;
-                        				
-                        				if(shmclock->nano >= 1000000000 - increment){
-                        				        shmclock->second += shmclock->nano / 1000000000;
-                        				        shmclock->nano += shmclock->nano % 1000000000;
-                        				}
-                        				else{
-			                               		shmclock->nano += increment;
-	                        			}
-
-						}
-
+							increment = 10000000;
+                        			}
+	
+                       				if(shmclock->nano >= 1000000000 - increment){
+                       				        shmclock->second += shmclock->nano / 1000000000;
+                       				        shmclock->nano += shmclock->nano % 1000000000;
+                       				}
+                       				else{
+		                               		shmclock->nano += increment;
+                        			}
+						
 						//if LRU dequeeue and enqueue to make it a reference.
 						if(!fifo){
 							struct Node* n = deQueue(fTable);
 							enQueue(fTable,n->key,n->frame);
 						}
-						//incrementClock(fp);
 					}
 					if(fault){
 						//handle victim
@@ -626,7 +624,7 @@ int main(int argc, char **argv){
 
 
 		//if not then just increment clock and loop back
-		incrementClock(fp);	
+		incrementClock(fp,fTable);	
 	}
 
 	return 0;
@@ -641,6 +639,10 @@ void printFrameTable(const struct Queue* q,FILE* fp){
 	fprintf(fp,"OSS: frame table: <%d,",node->frame);
 	while(node->next != NULL){
 		node = node->next;
+		if(node->frame == -1){
+	                fprintf(fp,".,");
+
+		}
 		fprintf(fp,"%d,",node->frame);
 	}
 	fprintf(fp,">\n");
@@ -648,7 +650,7 @@ void printFrameTable(const struct Queue* q,FILE* fp){
 
 //Increment the clock after each iteration of the loop.
 //by 1.xx seconds with xx nanoseconds between 1-1000 and 5MS
-void incrementClock(FILE * fp){
+void incrementClock(FILE * fp,const struct Queue* q){
 		if (r_semop(semid, semwait, 1) == -1){
                         perror("Error: oss: Failed to lock semid. ");
                         exitSafe(1);
@@ -664,13 +666,10 @@ void incrementClock(FILE * fp){
                         else{
                                 shmclock->nano += increment;
                         }
-			//if(errno){
-			//	perror("ERROR SOMETHING:");
-			//	exitSafe(1);
-			//}
 			if(currentSecond != shmclock->second){
 				currentSecond = shmclock->second;
 				fprintf(fp,"OSS: Current Time: %d:%d\n",shmclock->second,shmclock->nano);
+				printFrameTable(q,fp);
 			}
 			currentTime = (double)shmclock->second + ((double)shmclock->nano / 1000000000.0);
 			//printf("Current Time: %d:%d\n",shmclock->second,shmclock->nano);
