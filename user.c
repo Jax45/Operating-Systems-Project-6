@@ -51,7 +51,6 @@ int main(int argc, char  **argv) {
         }	
 	//initialize purpose
 	int purpose = 0;
-	bool isFinished = false;
 	setsembuf(semwait, 0, -1, 0);
 	setsembuf(semsignal, 0, 1, 0);
 	
@@ -61,55 +60,7 @@ int main(int argc, char  **argv) {
 	int requests = 1;
     while(1){	
 	
-	//generate random time to execute event
-/*	int executeMS = rand() % 1000;//% bound + 1;
-	struct Clock execute;
-	execute.nano = 0;
-	execute.second = 0;
-	r_semop(semid, semwait, 1);
-        struct Clock *shmclock = (struct Clock*) shmat(shmid,(void*)0,0);
-	//execute.nano += shmclock->nano;
-	execute.second += shmclock->second;
-	
-	long long exeNS = (executeMS * 1000000) + shmclock->nano;
-	if(exeNS > 1000000000){
-		execute.second += (exeNS / 1000000000);
-		execute.nano += exeNS % 1000000000;
-	}
-	else{
-		execute.second = shmclock->second;
-		execute.nano = exeNS;
-	}
-	//execute.nano += shmclock->nano;
-	shmdt(shmclock);
-	r_semop(semid, semsignal, 1);
-	// 0 - 250 ms
-		
-
-	int cpu = 0;
-	fflush(stdout);
-	bool isWaiting = true;
-	while(isWaiting){
-		r_semop(semid, semwait, 1);
-        	shmclock = (struct Clock*) shmat(shmid,(void*)0,0);
-        	struct PCB *shmpcb = (struct PCB*) shmat(shmidpcb, (void*)0,0);
-		finished = true;
-	
-		if((execute.second == shmclock->second && execute.nano < shmclock->nano) || execute.second < shmclock->second){
-			
-			isWaiting = false;
-
-			cpu += executeMS;
-			if( cpu > 1000){
-				isFinished = true;
-			}
-		}
-		shmdt(shmpcb);	
-		shmdt(shmclock);
-		r_semop(semid, semsignal, 1);
-	}
-*/	
-	//get the address
+	//get the address from 0 to 32k for the 32 pages
 	unsigned int address = rand() % 32767;
 	
 	if(requests % 1000 == 0){

@@ -4,7 +4,7 @@ TARGET		= oss
 OBJECTS		= oss.o
 CHILD		= user
 CHILDOBJS	= user.o
-LOG		= log.txt
+LOG		= log.txt lrulog.txt fifolog.txt
 DEP		= customStructs.h semaphoreFunc.h bitMap.h
 .SUFFIXES: .c .o
 

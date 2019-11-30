@@ -8,9 +8,9 @@
 //then this function returns -1 if none was found and
 //returns the first open spot if not.
 //also limits 0-17 in the bitMap.
-int openBit(unsigned char * bitMap, int lastPid){
+int openBit(unsigned char * bitMap, int lastPid, int limit){
         lastPid++;
-        if(lastPid > 17){
+        if(lastPid > limit-1){
           lastPid = 0;
         }
         int tempPid = lastPid;
@@ -21,7 +21,7 @@ int openBit(unsigned char * bitMap, int lastPid){
                 }
 
                 lastPid++;
-                if(lastPid > 17){
+                if(lastPid > limit-1){
                         lastPid = 0;
                 }
                 if( lastPid == tempPid){

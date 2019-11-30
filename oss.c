@@ -35,6 +35,7 @@ increments the clock and loops back.
 #define ALPHA 1
 #define BETA 1
 #define NUM_RES 20
+#define PROC_LIM 18
 //global var.
 int memAccess = 0;
 int pgFaults = 0;
@@ -53,6 +54,7 @@ char* logFile = "log.txt";
 int timeout = 3;
 long double passedTime = 0.0;
 bool fifo = true;
+int maxProcesses = 18;
 
 //get shared memory
 static int shmid;
@@ -153,7 +155,7 @@ int main(int argc, char **argv){
 	//const int BETA = 1;
 	int opt;
 	//get the options from the user.
-	while((opt = getopt (argc, argv, "ht:o:")) != -1){
+	while((opt = getopt (argc, argv, "ht:o:p:")) != -1){
 		switch(opt){
 			case 'h':
 				printf("Usage: ./oss [-t [timeout in seconds]] [-o [1 for fifo and 0 for LRU ]\n");
@@ -167,6 +169,12 @@ int main(int argc, char **argv){
 				}
 				else {
 					fifo = false;
+				}
+				break;
+			case 'p':
+				//int limit = atoi(optarg);
+				if(atoi(optarg) <= PROC_LIM && atoi(optarg) > 0){
+					maxProcesses = atoi(optarg);
 				}
 				break;
 			default:
@@ -292,8 +300,6 @@ int main(int argc, char **argv){
 	int lines = 0;
 	processes = 0;
 	int grantedRequests = 0;
-	const int maxTimeBetweenNewProcsNS = 500000000;
-	//const int maxTimeBetweenNewProcsSecs = 0;
 	shmpid = (struct Dispatch*) shmat(shmidPID,(void*)0,0);
 	struct Clock launchTime;
 	launchTime.second = 0;
@@ -311,17 +317,38 @@ int main(int argc, char **argv){
 	
 	while(1){
 		//check if we need to launch the processes
-		
+		if(launchTime.second == 0 && launchTime.nano == 0){
+
+
+			fprintf(fp,"OSS: generating a new launch time.\n");
+			r_semop(semid,semwait,1);
+			shmclock = (struct Clock*) shmat(shmid, (void*)0,0);
+			launchTime.second = shmclock->second;
+			launchTime.nano = shmclock->nano;
+			unsigned int increment = rand() % 500 + 1;
+			/*time between 1 - 500 ns from now*/
+			if(launchTime.nano >= 1000000000 - increment){
+				launchTime.second += launchTime.nano / 1000000000;
+				launchTime.nano += launchTime.nano % 1000000000;
+			}
+			else{
+				launchTime.nano += increment;
+			}
+			shmdt(shmclock);
+			r_semop(semid,semsignal,1);
+		}
+	
 		//get the semaphore	
 		if (r_semop(semid, semwait, 1) == -1){
                        perror("Error: oss: Failed to lock semid. ");
                        exitSafe(1);
                 }
                 else{	
+			//check launch time
 			shmclock = (struct Clock*) shmat(shmid, (void*)0,0);
-			if(1){
+			if(shmclock->second > launchTime.second || (shmclock->second == launchTime.second && shmclock->nano > launchTime.nano)){
 				//if we have an open bit, fork.
-				if(((lastPid = openBit(bitMap,lastPid)) != -1) && (processes < 100)){
+				if(((lastPid = openBit(bitMap,lastPid,maxProcesses)) != -1) && (processes < 100)){
 					launchTime.second = 0;
 					launchTime.nano = 0;
 					//launch the process
@@ -488,6 +515,22 @@ int main(int argc, char **argv){
 						fprintf(fp,"OSS: address %d is in frame %d writing data to Process %d at time %d:%d\n",address,shmpcb[message.bitIndex].pgTable[message.page].address,shmpcb[message.bitIndex].simPID,shmclock->second,shmclock->nano);
 						}
 						//page is in frame already
+						
+						//if dirty bit make sure to add 10ms to clock
+						if(shmpcb[message.bitIndex].pgTable[message.page].dirty == 1){
+							unsigned int increment = 10000000;
+                        				
+                        				if(shmclock->nano >= 1000000000 - increment){
+                        				        shmclock->second += shmclock->nano / 1000000000;
+                        				        shmclock->nano += shmclock->nano % 1000000000;
+                        				}
+                        				else{
+			                               		shmclock->nano += increment;
+	                        			}
+
+						}
+
+						//if LRU dequeeue and enqueue to make it a reference.
 						if(!fifo){
 							struct Node* n = deQueue(fTable);
 							enQueue(fTable,n->key,n->frame);
