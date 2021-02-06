@@ -53,3 +53,39 @@ the logs are listed as "lrulog.txt" and "fifolog.txt"
 -----------------------------------------------------------------------------
 
 GitLog:
+commit cb0faa96aef189af84e1f2dd1f44a03233f460c5
+Author: Jackson Hoenig <Jthkn9@Mail.Umsl.edu>
+Date:   Sat Nov 30 17:17:33 2019 -0600
+
+    Final commit.
+
+commit 575a4534313b6bd21cc2b1804eeb423cc3db8e57
+Author: Jackson Hoenig <Jthkn9@Mail.Umsl.edu>
+Date:   Sat Nov 30 14:38:18 2019 -0600
+
+    just need to deallocate after termination.
+
+commit 2a8cbccd28b3e4127b8d63256a91877c913e5bea
+Author: Jackson Hoenig <Jthkn9@Mail.Umsl.edu>
+Date:   Sat Nov 30 14:11:25 2019 -0600
+
+    Almost done still need to deallocate after termination and print the allocation every second of the clock.
+
+commit ce68b2fc26fade672c4b7d21d8fc8ad5898d0df0
+Author: Jackson Hoenig <Jthkn9@Mail.Umsl.edu>
+Date:   Fri Nov 29 20:02:55 2019 -0600
+
+    It is now working with lru and fifo and puts them each in a separate log.
+
+commit ead374e4ff8e8e0f24abd7d655c2e1f40579aee3
+Author: Jackson Hoenig <Jthkn9@Mail.Umsl.edu>
+Date:   Fri Nov 29 18:06:03 2019 -0600
+
+    Almost done still need to print the correct messages and maybe pagefault if the page is
+    not in frame but there is an open spot...
+
+commit 74e7711654fdab89dc8754702242f602ff2d6e85
+Author: Jackson Hoenig <Jthkn9@Mail.Umsl.edu>
+Date:   Wed Nov 27 18:13:09 2019 -0600
+
+    initial commit. I have an Erange error occuring possibly in the increment clock of the oss or the check clock in the user.
